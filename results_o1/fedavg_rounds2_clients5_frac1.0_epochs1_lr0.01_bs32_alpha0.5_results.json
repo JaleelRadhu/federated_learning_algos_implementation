@@ -1,0 +1,28 @@
+{
+    "hyperparameters": {
+        "algo": "fedavg",
+        "rounds": 2,
+        "num_clients": 5,
+        "client_fraction": 1.0,
+        "gpu": 0,
+        "lr": 0.01,
+        "batch_size": 32,
+        "local_epochs": 1,
+        "num_workers": 2,
+        "alpha": 0.5
+    },
+    "results": {
+        "train_losses": [
+            1.7909688385877982,
+            0.8328552947896604
+        ],
+        "test_losses": [
+            1.473002732900833,
+            0.8088276351950258
+        ],
+        "test_accuracies": [
+            65.16922925774918,
+            74.63464655892322
+        ]
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "hyperparameters": {
+        "algo": "fedadam_v2",
+        "rounds": 2,
+        "num_clients": 10,
+        "client_fraction": 1.0,
+        "gpu": 0,
+        "lr": 0.01,
+        "batch_size": 32,
+        "local_epochs": 5,
+        "num_workers": 2,
+        "alpha": 0.5
+    },
+    "results": {
+        "train_losses": [
+            1.090645855431827,
+            0.7079873043557379
+        ],
+        "test_losses": [
+            3.838700194068414,
+            2.67315204691559
+        ],
+        "test_accuracies": [
+            6.869258731640222,
+            51.336763766763276
+        ]
+    }
+}

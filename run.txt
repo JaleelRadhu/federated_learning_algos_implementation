@@ -1,0 +1,3 @@
+dfml1 : fedavg_rounds30_clients10_frac1.0_epochs3_lr0.01_bs3_alpha0.5
+dfml2: fedadam_rounds20_clients10_frac1.0_epochs3_lr0.001_bs32_alpha0.5
+dfml2: run seris of : 

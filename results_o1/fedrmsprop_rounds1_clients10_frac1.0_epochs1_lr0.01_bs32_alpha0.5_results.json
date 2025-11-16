@@ -1,0 +1,25 @@
+{
+    "hyperparameters": {
+        "algo": "fedrmsprop",
+        "rounds": 1,
+        "num_clients": 10,
+        "client_fraction": 1.0,
+        "gpu": 0,
+        "lr": 0.01,
+        "batch_size": 32,
+        "local_epochs": 1,
+        "num_workers": 2,
+        "alpha": 0.5
+    },
+    "results": {
+        "train_losses": [
+            2.214783652853522
+        ],
+        "test_losses": [
+            2.9057462748469445
+        ],
+        "test_accuracies": [
+            55.964164660804634
+        ]
+    }
+}

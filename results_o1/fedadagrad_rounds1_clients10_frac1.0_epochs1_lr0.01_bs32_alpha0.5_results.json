@@ -1,0 +1,25 @@
+{
+    "hyperparameters": {
+        "algo": "fedadagrad",
+        "rounds": 1,
+        "num_clients": 10,
+        "client_fraction": 1.0,
+        "gpu": 0,
+        "lr": 0.01,
+        "batch_size": 32,
+        "local_epochs": 1,
+        "num_workers": 2,
+        "alpha": 0.5
+    },
+    "results": {
+        "train_losses": [
+            2.0602883243651973
+        ],
+        "test_losses": [
+            4.877517778325409
+        ],
+        "test_accuracies": [
+            3.6492361349904208
+        ]
+    }
+}
