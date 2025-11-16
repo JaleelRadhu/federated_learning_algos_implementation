@@ -4,7 +4,7 @@
 # Define the algorithms to test. These must match the keys in the ALGORITHMS dict in main.py
 # ALGORITHMS := fedavg fedadam_v2 fedrmsprop fedadagrad fedamsgrad fedadamw
 
-ALGORITHMS :=   fedadamw fedamsgrad
+ALGORITHMS :=   fedavg
 # Note: 'fedadam' (client-side adam) is excluded as it is known to perform poorly and serves as a baseline comparison.
 # You can add it back to the list if you wish to generate its results.
 
@@ -13,7 +13,7 @@ ALGORITHMS :=   fedadamw fedamsgrad
 ROUNDS := 30
 NUM_CLIENTS := 10 20 30
 BATCH_SIZES := 32 16 128
-CLIENT_FRACTIONS := 1 0.8 0.5
+CLIENT_FRACTIONS := 0.8 0.5
 ALPHAS := 0.5 1
 LRS    :=  0.001 0.01
 EPOCHS := 1 2 3
