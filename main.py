@@ -18,6 +18,8 @@ from optimizers.fedadam import FedAdamClient
 from optimizers.fedadam_v2 import FedAdamV2Client, FedAdamV2Server
 from optimizers.fedrmsprop import FedRMSPropClient, FedRMSPropServer
 from optimizers.fedadagrad import FedAdagradClient, FedAdagradServer
+from optimizers.fedamsgrad import FedAMSGradClient, FedAMSGradServer
+from optimizers.fedadamw import FedAdamWClient, FedAdamWServer
 from optimizers.fedavg import FedAvgClient, FedAvgServer
 
 # --- Algorithm Registration ---
@@ -28,6 +30,8 @@ ALGORITHMS = {
     'fedadam_v2': {'client': FedAdamV2Client, 'server': FedAdamV2Server}, # Method 2: Server-side Adam
     'fedrmsprop': {'client': FedRMSPropClient, 'server': FedRMSPropServer}, # Server-side RMSProp
     'fedadagrad': {'client': FedAdagradClient, 'server': FedAdagradServer}, # Server-side Adagrad
+    'fedamsgrad': {'client': FedAMSGradClient, 'server': FedAMSGradServer}, # Server-side AMSGrad
+    'fedadamw': {'client': FedAdamWClient, 'server': FedAdamWServer}, # Server-side AdamW
 }
 
 # --- Worker Initialization ---

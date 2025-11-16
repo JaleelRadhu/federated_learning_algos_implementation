@@ -1,2 +1,4 @@
-data/
+data/femnist_splits/
+data/__pycache__/
 __pycache__/
+*.pyc

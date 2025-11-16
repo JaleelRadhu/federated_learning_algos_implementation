@@ -5,18 +5,17 @@ from torch.utils.data import DataLoader
 from optimizers.base_server import FedServerWithOptimizer
 from optimizers.fedavg import FedAvgClient
 
-class FedAdamWClient(FedAvgClient):
+class FedAMSGradClient(FedAvgClient):
     """
-    Client for FedAdamW. It's identical to FedAvgClient as it performs local
+    Client for FedAMSGrad. It's identical to FedAvgClient as it performs local
     training with SGD and sends its updated model to the server.
     """
     pass
 
-class FedAdamWServer(FedServerWithOptimizer):
+class FedAMSGradServer(FedServerWithOptimizer):
     """
-    Server for FedAdamW.
-    It maintains a server-side AdamW optimizer and applies aggregated client
-    updates to the global model.
+    Server for FedAMSGrad.
+    It maintains a server-side Adam optimizer with the AMSGrad variant enabled.
     """
     def __init__(
         self,
@@ -24,30 +23,28 @@ class FedAdamWServer(FedServerWithOptimizer):
         test_loader: DataLoader,
         learning_rate: float, # Client LR
         device: torch.device,
-        # AdamW specific parameters
+        # Adam/AMSGrad specific parameters
         eta: float = 1e-3, # Server-side learning rate
         beta1: float = 0.9,
         beta2: float = 0.999,
         tau: float = 1e-8, # Epsilon term
-        weight_decay: float = 1e-2,
     ):
         """
-        Initializes the FedAdamWServer.
+        Initializes the FedAMSGradServer.
 
         Args:
             model (nn.Module): The global PyTorch model.
             test_loader (DataLoader): DataLoader for the central test set.
             learning_rate (float): Client-side learning rate.
             device (torch.device): The device to run the model on.
-            eta (float): Server-side learning rate for AdamW.
-            beta1 (float): AdamW optimizer beta1.
-            beta2 (float): AdamW optimizer beta2.
-            tau (float): Regularization/smoothing term for AdamW (eps).
-            weight_decay (float): Weight decay for AdamW.
+            eta (float): Server-side learning rate for Adam.
+            beta1 (float): Adam optimizer beta1.
+            beta2 (float): Adam optimizer beta2.
+            tau (float): Regularization/smoothing term for Adam (eps).
         """
         super().__init__(model, test_loader, learning_rate, device)
         
-        # Server-side optimizer state using AdamW
-        self.optimizer = torch.optim.AdamW(
-            self.model.parameters(), lr=eta, betas=(beta1, beta2), eps=tau, weight_decay=weight_decay
+        # Server-side optimizer state with amsgrad=True
+        self.optimizer = torch.optim.Adam(
+            self.model.parameters(), lr=eta, betas=(beta1, beta2), eps=tau, amsgrad=True
         )

@@ -2,9 +2,9 @@
 
 # --- Configuration ---
 # Define the algorithms to test. These must match the keys in the ALGORITHMS dict in main.py
-# ALGORITHMS := fedadam_v2 fedrmsprop fedadagrad
-# ALGORITHMS := fedavg
+# ALGORITHMS := fedavg fedadam_v2 fedrmsprop fedadagrad fedamsgrad fedadamw
 
+ALGORITHMS :=  fedamsgrad fedadamw
 
 # Note: 'fedadam' (client-side adam) is excluded as it is known to perform poorly and serves as a baseline comparison.
 # You can add it back to the list if you wish to generate its results.
