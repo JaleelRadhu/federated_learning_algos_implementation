@@ -19,11 +19,9 @@ class FedServerWithOptimizer(Node):
         learning_rate: float,
         device: torch.device,
     ):
-        # Move the model to the correct device *before* initializing the optimizer
         model.to(device)
         super().__init__(model=model, device=device, learning_rate=learning_rate)
         self.test_loader = test_loader
-        # The optimizer must be defined by the child class
         self.optimizer = None
 
     def update_model(self, client_state_dicts: List[OrderedDict], client_weights: List[float]):
@@ -41,20 +39,16 @@ class FedServerWithOptimizer(Node):
         
         aggregated_state_dict = OrderedDict()
         for key in initial_global_state.keys():
-            # Client state dicts are on CPU, move them to server device for aggregation
             weighted_sum = torch.stack([state_dict[key].to(self.device) * weight for state_dict, weight in zip(client_state_dicts, normalized_weights)]).sum(dim=0)
             aggregated_state_dict[key] = weighted_sum
 
-        # Calculate the aggregated model delta (pseudo-gradient)
         model_delta = OrderedDict()
         for key in initial_global_state.keys():
             model_delta[key] = aggregated_state_dict[key] - initial_global_state[key]
 
-        # Apply the delta to the global model's gradients
         self.optimizer.zero_grad()
         for name, param in self.model.named_parameters():
             if param.requires_grad:
-                # Use a negative sign because optimizers perform gradient *descent*
                 param.grad = -1.0 * model_delta[name]
 
         # Take a step with the server-side optimizer

@@ -22,12 +22,11 @@ class FedRMSPropServer(FedServerWithOptimizer):
         self,
         model: nn.Module,
         test_loader: DataLoader,
-        learning_rate: float, # This is the client LR, passed for consistency
+        learning_rate: float, 
         device: torch.device,
-        # FedRMSProp specific parameters
-        eta: float = 1e-2, # Server-side learning rate
-        alpha: float = 0.99, # Smoothing constant
-        tau: float = 1e-2, # Regularization term
+        eta: float = 1e-2,
+        alpha: float = 0.99, 
+        tau: float = 1e-2, 
     ):
         """
         Initializes the FedRMSPropServer.
@@ -42,7 +41,6 @@ class FedRMSPropServer(FedServerWithOptimizer):
             tau (float): Regularization/smoothing term for RMSprop (eps).
         """
         super().__init__(model, test_loader, learning_rate, device)
-        # Server-side optimizer state
         self.optimizer = torch.optim.RMSprop(
             self.model.parameters(),
             lr=eta,
