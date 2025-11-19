@@ -22,11 +22,11 @@ class FedAdagradServer(FedServerWithOptimizer):
         self,
         model: nn.Module,
         test_loader: DataLoader,
-        learning_rate: float, # This is the client LR, passed for consistency
+        learning_rate: float, 
         device: torch.device,
         # FedAdagrad specific parameters
         eta: float = 1e-2, # Server-side learning rate
-        tau: float = 1e-9, # Regularization term to avoid division by zero
+        tau: float = 1e-9, # avoid division by zero
     ):
         """
         Initializes the FedAdagradServer.

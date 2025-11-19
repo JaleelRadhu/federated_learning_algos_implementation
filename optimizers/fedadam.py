@@ -51,7 +51,6 @@ class FedAdamClient(Node):
         
         total_loss = 0.0
         for epoch in range(local_epochs):
-            # Add a progress bar to visualize the training loop for each client
             progress_bar = tqdm(self.dataloader, 
                                 desc=f"Client {self.client_id} Epoch {epoch+1}/{local_epochs}", 
                                 leave=False)

@@ -31,7 +31,6 @@ class FedAvgClient(Node):
             learning_rate (float): The learning rate for the optimizer.
             device (torch.device): The device to run the model on.
         """
-        # The client receives its own unique model instance.
         super().__init__(model=model, device=device, learning_rate=learning_rate)
         self.client_id = client_id
         self.dataloader = dataloader
@@ -55,7 +54,6 @@ class FedAvgClient(Node):
         
         total_loss = 0.0
         for epoch in range(local_epochs):
-            # Add a progress bar to visualize the training loop for each client
             progress_bar = tqdm(self.dataloader, 
                                 desc=f"Client {self.client_id} Epoch {epoch+1}/{local_epochs}", 
                                 leave=False)
@@ -69,7 +67,6 @@ class FedAvgClient(Node):
                 optimizer.step()
                 total_loss += loss.item()
         
-        # Return the average loss
         return total_loss / (len(self.dataloader) * local_epochs)
 
 class FedAvgServer(Node):
